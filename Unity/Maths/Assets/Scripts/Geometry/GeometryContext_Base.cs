@@ -5,10 +5,26 @@ public abstract class GeometryContext_Base : MonoBehaviour
 {
 	private Transform elementContainer_ = null;
 
-	private float defaultPointSize_ = 1f;
+	protected GeometryGrid_Base Grid
+	{
+		get { return this.GetGridBase ( ); }
+	}
+
+	abstract protected GeometryGrid_Base GetGridBase ( );
+
+	protected abstract float ComputeDefaultPointSize ( );
+
+	private float defaultPointSize_ = -1f;
 	public float DefaultPointSize
 	{
-		get { return defaultPointSize_; } 
+		get 
+		{
+			if (defaultPointSize_ == -1f)
+			{
+				defaultPointSize_ = this.ComputeDefaultPointSize();
+			}
+			return defaultPointSize_; 
+		} 
 	}
 
 	public void AddElement( GeometryElement_Base e)
@@ -18,10 +34,18 @@ public abstract class GeometryContext_Base : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+		gameObject.layer = UnityHelpers.GetLayerNum ( "GeometryContext" );
+
 		GameObject go = new GameObject();
 		go.name = "Elements";
+		go.layer = UnityHelpers.GetLayerNum ( "GeometryContext" );
+
 		go.transform.parent = transform;
 		elementContainer_ = go.transform;
+	}
+
+	public virtual void Init()
+	{
 	}
 
 	// Use this for initialization

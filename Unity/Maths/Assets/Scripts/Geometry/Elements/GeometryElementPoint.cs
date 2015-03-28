@@ -67,7 +67,7 @@ public class GeometryElementPoint : GeometryElement_Base
 		base.Start ();
 
 		MeshRenderer mesh = display_.GetComponent< MeshRenderer > ();
-		material_ = new Material (mesh.material);
+		material_ = GeometryHelpers.GetPlainColourMaterial();
 		material_.SetColor("_MainTint", colour_);
 		mesh.material = material_;
 

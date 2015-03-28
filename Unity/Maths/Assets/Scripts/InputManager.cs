@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputManager : SingletonSceneLifetime< InputManager > 
+public class InputManager : MonoBehaviour 
 {
-
 	// Use this for initialization
 	void Start () 
 	{

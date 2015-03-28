@@ -13,6 +13,7 @@ public abstract class GeometryElement_Base : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+		gameObject.layer = UnityHelpers.GetLayerNum ( "GeometryElements" );
 	}
 
 	protected virtual void Init( GeometryContext_Base c)
