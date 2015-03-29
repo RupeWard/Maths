@@ -30,19 +30,14 @@ public class GeometryContextPlane : GeometryContext_Base
 
 		return (rad1-rad0).magnitude;
 	}
-		                                              
-	public Vector3 GetWorldPosition(Vector2 v, float z)
-	{
-		return Camera.main.ScreenToWorldPoint( new Vector3(v.x, v.y, z));
-	}
-	
+
 	public Rect MakeWorldRect(Rect r, float z)
 	{
 		Vector3 bottomLeft = GetWorldPosition ( new Vector2( r.xMin, r.yMin), z);
 		Vector3 topRight = GetWorldPosition ( new Vector2( r.xMax, r.yMax), z);
 
 		Rect rect = new Rect( bottomLeft.x, bottomLeft.y, (topRight.x - bottomLeft.x), (topRight.y - bottomLeft.y));
-		Debug.Log("From "+r+" BL = "+bottomLeft+" TR = "+topRight+" r = "+rect);
+//		Debug.Log("From "+r+" BL = "+bottomLeft+" TR = "+topRight+" r = "+rect);
 		return rect;
 	}
 	
@@ -125,5 +120,16 @@ public class GeometryContextPlane : GeometryContext_Base
 		GeometryElementPoint result = GeometryElementPoint.Create( this, n, new Vector3( pos.x, pos.y, s_defaultPlaneZ), colour);
 		return result;
 	}
-	                                       
+
+	public GeometryElementLine CreateLine( string n, Vector2[] ends2, Color colour)
+	{
+		Vector3[] ends3 = new Vector3[2]
+		{
+			new Vector3( ends2[0].x, ends2[0].y, s_defaultPlaneZ),
+			new Vector3( ends2[1].x, ends2[1].y, s_defaultPlaneZ),
+		};
+		GeometryElementLine result = GeometryElementLine.Create( this, n, ends3, colour);
+		return result;
+	}
+
 }

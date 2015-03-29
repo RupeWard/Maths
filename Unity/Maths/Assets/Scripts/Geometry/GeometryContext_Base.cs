@@ -27,6 +27,18 @@ public abstract class GeometryContext_Base : MonoBehaviour
 		} 
 	}
 
+	public Vector3 GetWorldPosition(Vector2 v, float z)
+	{
+		Vector3 result = Camera.main.ScreenToWorldPoint( new Vector3(v.x, v.y, 200f));
+		result.z=z;
+		return result;
+	}
+
+	public Vector3 GetWorldPosition(Vector3 v)
+	{
+		return Camera.main.ScreenToWorldPoint( v);
+	}
+
 	public void AddElement( GeometryElement_Base e)
 	{
 		e.transform.parent = elementContainer_;

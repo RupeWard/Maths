@@ -42,7 +42,7 @@ public class GeometryElementPoint : GeometryElement_Base
 		}
 		else
 		{
-			gep.Init( context, colour, pos);
+			gep.Init( context, colour, pos );
 			return gep;
 		}
 
@@ -54,7 +54,7 @@ public class GeometryElementPoint : GeometryElement_Base
 		size_ = 1f;
 	}
 
-	protected void Init( GeometryContext_Base context, Color colour, Vector3 pos)
+	protected void Init( GeometryContext_Base context, Color colour, Vector3 pos )
 	{
 		base.Init(context);
 		pos_ = pos;
@@ -69,9 +69,11 @@ public class GeometryElementPoint : GeometryElement_Base
 		MeshRenderer mesh = display_.GetComponent< MeshRenderer > ();
 		material_ = GeometryHelpers.GetPlainColourMaterial();
 		material_.SetColor("_MainTint", colour_);
+
 		mesh.material = material_;
 
-		display_.transform.position = pos_;
+		transform.position = context_.GetWorldPosition( new Vector2(pos_.x, pos_.y), GeometryContextPlane.s_defaultPlaneZ );
+		Debug.Log ("Point "+pos_+" -> "+transform.position);
 		display_.transform.localScale = size_ * Vector3.one;
 	}
 	

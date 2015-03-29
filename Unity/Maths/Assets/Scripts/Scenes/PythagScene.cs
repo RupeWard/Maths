@@ -10,7 +10,14 @@ public class PythagScene : MonoBehaviour
 	{
 		geometryContext_ = GeometryContextPlane.Create ("PlaneContext", gameObject  );
 
-		GeometryElementPoint p = geometryContext_.CreatePoint( "p0", Vector2.zero, Color.magenta);
+		GeometryElementPoint p = geometryContext_.CreatePoint( "p0", new Vector2(0.5f*Screen.width, 0.5f*Screen.height), Color.magenta);
+		GeometryElementLine l 
+			= geometryContext_.CreateLine( "l0", 
+			    new Vector2[2]{ 
+				new Vector2( 0.2f * Screen.width, 0.1f * Screen.height),
+				new Vector2( 0.8f * Screen.width, 0.6f * Screen.height)
+				},
+			Color.green);
 	}
 	
 	// Update is called once per frame
